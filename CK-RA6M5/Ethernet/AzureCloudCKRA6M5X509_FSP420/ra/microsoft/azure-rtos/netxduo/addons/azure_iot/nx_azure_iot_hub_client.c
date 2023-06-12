@@ -9,8 +9,6 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* Version: 6.1 */
-
 #include "nx_azure_iot_hub_client.h"
 
 #include "azure/core/az_version.h"
@@ -49,6 +47,8 @@ static UCHAR _nx_azure_iot_hub_client_user_agent[] = NX_AZURE_IOT_HUB_CLIENT_USE
 #endif /* NX_AZURE_IOT_HUB_CLIENT_USER_AGENT */
 
 #define NX_AZURE_IOT_HUB_CLIENT_COMPONENT_STRING        "$.sub"
+
+#define NX_AZURE_IOT_HUB_CLIENT_WEB_SOCKET_PATH         "/$iothub/websocket"
 
 static VOID nx_azure_iot_hub_client_received_message_cleanup(NX_AZURE_IOT_HUB_CLIENT_RECEIVE_MESSAGE *message);
 static UINT nx_azure_iot_hub_client_cloud_message_sub_unsub(NX_AZURE_IOT_HUB_CLIENT *hub_client_ptr,
@@ -351,6 +351,25 @@ ULONG         index;
 }
 #endif /* NX_AZURE_IOT_HUB_CLIENT_USER_AGENT_UPDATE */
 
+#ifdef NXD_MQTT_OVER_WEBSOCKET
+UINT nx_azure_iot_hub_client_websocket_enable(NX_AZURE_IOT_HUB_CLIENT *hub_client_ptr)
+{
+NX_AZURE_IOT_RESOURCE *resource_ptr;
+
+    if (hub_client_ptr == NX_NULL)
+    {
+        LogError(LogLiteralArgs("IoTHub WebSocket enable fail: INVALID POINTER"));
+        return(NX_AZURE_IOT_INVALID_PARAMETER);
+    }
+
+    /* Set resource pointer.  */
+    resource_ptr = &(hub_client_ptr -> nx_azure_iot_hub_client_resource);
+
+    return(nxd_mqtt_client_websocket_set(&(resource_ptr -> resource_mqtt), (UCHAR *)resource_ptr -> resource_hostname, resource_ptr -> resource_hostname_length, 
+                                         (UCHAR *)NX_AZURE_IOT_HUB_CLIENT_WEB_SOCKET_PATH, sizeof(NX_AZURE_IOT_HUB_CLIENT_WEB_SOCKET_PATH) - 1));
+}
+#endif /* NXD_MQTT_OVER_WEBSOCKET */
+
 UINT nx_azure_iot_hub_client_connect(NX_AZURE_IOT_HUB_CLIENT *hub_client_ptr,
                                      UINT clean_session, UINT wait_option)
 {
@@ -364,6 +383,7 @@ VOID            *buffer_context;
 UINT            buffer_length;
 ULONG           expiry_time_secs;
 az_result       core_result;
+UINT            server_port;
 
     /* Check for invalid input pointers.  */
     if ((hub_client_ptr == NX_NULL) || (hub_client_ptr -> nx_azure_iot_ptr == NX_NULL))
@@ -490,6 +510,7 @@ az_result       core_result;
     }
     else
     {
+        resource_ptr -> resource_mqtt_sas_token = NX_NULL;
         resource_ptr ->  resource_mqtt_sas_token_length = 0;
     }
 
@@ -530,8 +551,21 @@ az_result       core_result;
     /* Release the mutex.  */
     tx_mutex_put(hub_client_ptr -> nx_azure_iot_ptr -> nx_azure_iot_mutex_ptr);
 
+#ifdef NXD_MQTT_OVER_WEBSOCKET
+    if (mqtt_client_ptr -> nxd_mqtt_client_use_websocket == NX_TRUE)
+    {
+        server_port = NXD_MQTT_OVER_WEBSOCKET_TLS_PORT;
+    }
+    else
+    {
+        server_port = NXD_MQTT_TLS_PORT;
+    }
+#else
+    server_port = NXD_MQTT_TLS_PORT;
+#endif /* NXD_MQTT_OVER_WEBSOCKET */
+
     /* Start MQTT connection.  */
-    status = nxd_mqtt_client_secure_connect(mqtt_client_ptr, &server_address, NXD_MQTT_TLS_PORT,
+    status = nxd_mqtt_client_secure_connect(mqtt_client_ptr, &server_address, server_port,
                                             nx_azure_iot_mqtt_tls_setup, NX_AZURE_IOT_MQTT_KEEP_ALIVE,
                                             clean_session, wait_option);
 

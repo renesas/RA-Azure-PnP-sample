@@ -24,6 +24,7 @@ FSP Configuration
     Security: SRAM Accessibility: Standby RAM: Regions 7-0 are all Secure.
     Security: BUS Accessibility: Bus Security Attribution Register A: Both Secure and Non-Secure State
     Security: BUS Accessibility: Bus Security Attribution Register B: Both Secure and Non-Secure State
+    Security: Uninitialized Non-Secure Application Fallback: Enable Uninitialized Non-Secure Application Fallback
     Startup C-Cache Line Size: 32 Bytes
     OFS0 register settings: Independent WDT: Start Mode: IWDT is Disabled
     OFS0 register settings: Independent WDT: Timeout Period: 2048 cycles
@@ -464,6 +465,15 @@ FSP Configuration
     Parameter Checking: Default (BSP)
     
   Module "Azure RTOS ThreadX Port (rm_threadx_port)"
+  Module "External IRQ (r_icu)"
+    Parameter Checking: Default (BSP)
+    
+  Module "Timer, General PWM (r_gpt)"
+    Parameter Checking: Default (BSP)
+    Pin Output Support: Disabled
+    Write Protect Enable: Disabled
+    Clock Source: PCLKD
+    
   Module "Azure RTOS NetX Duo DHCP IPv4 Client"
     Common: Error Checking: Enabled (default)
     Common: IP Packet Filter: Enabled
@@ -833,6 +843,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
+    Azure IoT: Defender Security Module: Disable
     
   Module "Azure RTOS NetX Duo IP Instance"
     Common: Error Checking: Enabled (default)
@@ -1203,6 +1214,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
+    Azure IoT: Defender Security Module: Disable
     
   Module "Azure RTOS NetX Duo Packet Pool Instance"
     Common: Error Checking: Enabled (default)
@@ -1573,6 +1585,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
+    Azure IoT: Defender Security Module: Disable
     
   Module "NetX Duo Ethernet Driver (rm_netxduo_ether)"
   Module "Ethernet (r_ether)"
@@ -1958,6 +1971,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
+    Azure IoT: Defender Security Module: Disable
     
   Module "Azure RTOS NetX Duo IoT Middleware"
   Module "Azure RTOS NetX Secure"
@@ -1972,7 +1986,7 @@ FSP Configuration
     TLS v1.0: Enable
     TLS v1.1 Legacy Mode: Enable
     TLS v1.1: Enable
-    Server Mode: Enable
+    Server Mode: Disable
     Client Mode: Enable
     Error Checking: Enable
     DTLS: Disable
@@ -2347,6 +2361,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
+    Azure IoT: Defender Security Module: Disable
     
   Module "Azure RTOS NetX Crypto HW Acceleration (rm_netx_secure_crypto)"
     Standalone Usage: Use with TLS
@@ -2732,15 +2747,7 @@ FSP Configuration
     Web HTTP: Server: Server Next Re-transmission timeout shift: 1
     Common: TCP/IP Offload: Disable
     Common: Interface Capability: Disable
-    
-  Module "External IRQ (r_icu)"
-    Parameter Checking: Default (BSP)
-    
-  Module "Timer, General PWM (r_gpt)"
-    Parameter Checking: Default (BSP)
-    Pin Output Support: Disabled
-    Write Protect Enable: Disabled
-    Clock Source: PCLKD
+    Azure IoT: Defender Security Module: Disable
     
   Module "HS300X Temperature/Humidity Sensor (rm_hs300x)"
     Parameter Checking: Default (BSP)
@@ -2752,6 +2759,11 @@ FSP Configuration
     
   Module "I2C Shared Bus (rm_comms_i2c)"
     Parameter Checking: Default (BSP)
+    
+  Module "I2C Master (r_iic_master)"
+    Parameter Checking: Default (BSP)
+    DTC on Transmission and Reception: Disabled
+    10-bit slave addressing: Disabled
     
   Module "ZMOD4XXX Gas Sensor (rm_zmod4xxx)"
     Parameter Checking: Default (BSP)
@@ -2769,11 +2781,6 @@ FSP Configuration
     Parameter Checking: Default (BSP)
     Code Flash Programming Enable: Disabled
     Data Flash Programming Enable: Enabled
-    
-  Module "I2C Master (r_iic_master)"
-    Parameter Checking: Default (BSP)
-    DTC on Transmission and Reception: Disabled
-    10-bit slave addressing: Disabled
     
   Azure RTOS ThreadX
     General: Custom tx_user.h: 
@@ -2868,8 +2875,8 @@ FSP Configuration
       Extra Features: Output Disable: POEG Link: POEG Channel 0
       Extra Features: Output Disable: Output Disable POEG Trigger: 
       Extra Features: ADC Trigger: Start Event Trigger (Channels with GTINTAD only): 
-      Extra Features: Dead Time: Dead Time Count Up (Raw Counts): 0
-      Extra Features: Dead Time: Dead Time Count Down (Raw Counts) (Channels with GTDVD only): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Up (Raw Counts): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Down (Raw Counts) (Channels with GTDVD only): 0
       Extra Features: ADC Trigger (Channels with GTADTRA only): ADC A Compare Match (Raw Counts): 0
       Extra Features: ADC Trigger (Channels with GTADTRB only): ADC B Compare Match (Raw Counts): 0
       Extra Features: Interrupt Skipping (Channels with GTITC only): Interrupt to Count: None
@@ -2916,8 +2923,8 @@ FSP Configuration
       Extra Features: Output Disable: POEG Link: POEG Channel 0
       Extra Features: Output Disable: Output Disable POEG Trigger: 
       Extra Features: ADC Trigger: Start Event Trigger (Channels with GTINTAD only): 
-      Extra Features: Dead Time: Dead Time Count Up (Raw Counts): 0
-      Extra Features: Dead Time: Dead Time Count Down (Raw Counts) (Channels with GTDVD only): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Up (Raw Counts): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Down (Raw Counts) (Channels with GTDVD only): 0
       Extra Features: ADC Trigger (Channels with GTADTRA only): ADC A Compare Match (Raw Counts): 0
       Extra Features: ADC Trigger (Channels with GTADTRB only): ADC B Compare Match (Raw Counts): 0
       Extra Features: Interrupt Skipping (Channels with GTITC only): Interrupt to Count: None
@@ -3208,7 +3215,7 @@ FSP Configuration
       Instance "g_external_irq0 External IRQ (r_icu)"
         Name: g_external_irq0
         Channel: 4
-        Trigger: Falling
+        Trigger: Rising
         Digital Filtering: Disabled
         Digital Filtering Sample Clock (Only valid when Digital Filtering is Enabled): PCLK / 64
         Callback: rm_zmod4xxx_irq_callback
@@ -3288,7 +3295,7 @@ FSP Configuration
     Symbol: ZMOD4510_Thread
     Name: ZMOD4510_Thread
     Stack size (bytes): 2048
-    Priority: 2
+    Priority: 3
     Auto start: Disabled
     Time slicing interval (ticks): 1
     

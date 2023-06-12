@@ -9,7 +9,7 @@
     <option key="#DeviceCommand#" value="R7FA6M5BH"/>
     <option key="#RTOS#" value="rtos.threadx"/>
     <option key="#pinconfiguration#" value="R7FA6M5BH3CFC.pincfg"/>
-    <option key="#FSPVersion#" value="4.2.0"/>
+    <option key="#FSPVersion#" value="4.4.0"/>
     <option key="#ConfigurationFragments#" value="Renesas##BSP##Board##ra6m5_ck##"/>
     <option key="#SELECTED_TOOLCHAIN#" value="gcc-arm-embedded"/>
     <option key="#ToolchainVersion#" value="10.3.1.20210824"/>
@@ -41,6 +41,7 @@
       <property id="config.bsp.fsp.tz.stbramsar" value="config.bsp.fsp.tz.stbramsar.both"/>
       <property id="config.bsp.fsp.tz.bussara" value="config.bsp.fsp.tz.bussara.both"/>
       <property id="config.bsp.fsp.tz.bussarb" value="config.bsp.fsp.tz.bussarb.both"/>
+      <property id="config.bsp.fsp.tz.uninitialized_ns_application_fallback" value="config.bsp.fsp.tz.uninitialized_ns_application_fallback.enabled"/>
       <property id="config.bsp.fsp.cache_line_size" value="config.bsp.fsp.cache_line_size.32"/>
       <property id="config.bsp.fsp.OFS0.iwdt_start_mode" value="config.bsp.fsp.OFS0.iwdt_start_mode.disabled"/>
       <property id="config.bsp.fsp.OFS0.iwdt_timeout" value="config.bsp.fsp.OFS0.iwdt_timeout.2048"/>
@@ -74,6 +75,9 @@
       <property id="config.bsp.fsp.mcu.sci_spi.max_bitrate" value="25000000"/>
       <property id="config.bsp.fsp.mcu.spi.max_bitrate" value="50000000"/>
       <property id="config.bsp.fsp.mcu.iic_master.rate.rate_fastplus" value="1"/>
+      <property id="config.bsp.fsp.mcu.iic_master.fastplus_channels" value="0x3"/>
+      <property id="config.bsp.fsp.mcu.iic_slave.rate.rate_fastplus" value="1"/>
+      <property id="config.bsp.fsp.mcu.iic_slave.fastplus_channels" value="0x3"/>
       <property id="config.bsp.fsp.mcu.canfd.num_channels" value="2"/>
       <property id="config.bsp.fsp.mcu.canfd.rx_fifos" value="8"/>
       <property id="config.bsp.fsp.mcu.canfd.buffer_ram" value="4864"/>
@@ -82,6 +86,7 @@
       <property id="config.bsp.fsp.mcu.canfd.max_data_rate_hz" value="8"/>
       <property id="config.bsp.fsp.mcu.sci_uart.cstpen_channels" value="0x03F9"/>
       <property id="config.bsp.fsp.mcu.gpt.pin_count_source_channels" value="0xFFFF"/>
+      <property id="config.bsp.fsp.mcu.adc_dmac.samples_per_channel" value="65535"/>
     </config>
     <config id="config.bsp.ra">
       <property id="config.bsp.common.main" value="0x1000"/>
@@ -152,117 +157,117 @@
     <node id="board.clock.cecclk.display" option="board.clock.cecclk.display.value"/>
   </raClockConfiguration>
   <raComponentSelection>
-    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="4.2.0">
-      <description>Board Support Package Common Files</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ioport" variant="" vendor="Renesas" version="4.2.0">
-      <description>I/O Port</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="RTOS" condition="" group="Azure" subgroup="ThreadX" variant="" vendor="Microsoft" version="6.1.12+fsp.4.2.0">
-      <description>Azure RTOS ThreadX</description>
-      <originalPack>Microsoft.ThreadX.6.1.12+fsp.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="CMSIS" condition="" group="CMSIS5" subgroup="CoreM" variant="" vendor="Arm" version="5.9.0+renesas.0.fsp.4.2.0">
-      <description>Arm CMSIS Version 5 - Core (M)</description>
-      <originalPack>Arm.CMSIS5.5.9.0+renesas.0.fsp.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_threadx_port" variant="" vendor="Renesas" version="4.2.0">
-      <description>Azure RTOS ThreadX Port</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="device" variant="R7FA6M5BH3CFC" vendor="Renesas" version="4.2.0">
-      <description>Board support package for R7FA6M5BH3CFC</description>
-      <originalPack>Renesas.RA_mcu_ra6m5.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="device" variant="" vendor="Renesas" version="4.2.0">
-      <description>Board support package for RA6M5</description>
-      <originalPack>Renesas.RA_mcu_ra6m5.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="fsp" variant="" vendor="Renesas" version="4.2.0">
-      <description>Board support package for RA6M5 - FSP Data</description>
-      <originalPack>Renesas.RA_mcu_ra6m5.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="BSP" condition="" group="Board" subgroup="ra6m5_ck" variant="" vendor="Renesas" version="4.2.0">
-      <description>RA6M5-CK Board Support Files</description>
-      <originalPack>Renesas.RA_board_ra6m5_ck.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ether_phy" variant="" vendor="Renesas" version="4.2.0">
-      <description>Ethernet PHY</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ether" variant="" vendor="Renesas" version="4.2.0">
-      <description>Ethernet</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_flash_hp" variant="" vendor="Renesas" version="4.2.0">
-      <description>Flash Memory High Performance</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpt" variant="" vendor="Renesas" version="4.2.0">
-      <description>General PWM Timer</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_icu" variant="" vendor="Renesas" version="4.2.0">
-      <description>External Interrupt</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_iic_master" variant="" vendor="Renesas" version="4.2.0">
-      <description>I2C Master Interface</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_sce9_ra6_plaintext" variant="" vendor="Renesas" version="4.2.0">
-      <description>Secure Cryptography Engine on RA6 (SCE9) Compatibility Mode</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_sci_uart" variant="" vendor="Renesas" version="4.2.0">
-      <description>SCI UART</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_netxduo_ether" variant="" vendor="Renesas" version="4.2.0">
-      <description>NetX Duo Ethernet Driver</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_netx_secure_crypto" variant="" vendor="Renesas" version="4.2.0">
-      <description>NetX Secure Crypto H/W Acceleration</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_comms_i2c" variant="" vendor="Renesas" version="4.2.0">
-      <description>I2C Communications Implementation</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_hs300x" variant="" vendor="Renesas" version="4.2.0">
-      <description>HS300X Sensor Implementation</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4xxx" variant="" vendor="Renesas" version="4.2.0">
-      <description>ZMOD4XXX Sensor Implementation</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4410_iaq_1st" variant="" vendor="Renesas" version="4.2.0">
-      <description>ZMOD4XXX Sensor Lib IAQ 1st</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4510_oaq_1st" variant="" vendor="Renesas" version="4.2.0">
-      <description>ZMOD4XXX Sensor Lib OAQ 1st</description>
-      <originalPack>Renesas.RA.4.2.0.pack</originalPack>
-    </component>
-    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nxd" variant="" vendor="Microsoft" version="6.1.12+fsp.4.2.0">
+    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nxd" variant="" vendor="Microsoft" version="6.2.1+renesas.1.fsp.4.4.0">
       <description>Azure RTOS NetX Duo</description>
-      <originalPack>Microsoft.NetXDuo.6.1.12+fsp.4.2.0.pack</originalPack>
+      <originalPack>Microsoft.NetXDuo.6.2.1+renesas.1.fsp.4.4.0.pack</originalPack>
     </component>
-    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="azure_iot" variant="" vendor="Microsoft" version="6.1.12+fsp.4.2.0">
+    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="azure_iot" variant="" vendor="Microsoft" version="6.2.1+renesas.1.fsp.4.4.0">
       <description>Azure IoT Middleware for Azure RTOS</description>
-      <originalPack>Microsoft.NetXDuo.6.1.12+fsp.4.2.0.pack</originalPack>
+      <originalPack>Microsoft.NetXDuo.6.2.1+renesas.1.fsp.4.4.0.pack</originalPack>
     </component>
-    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nx_crypto" variant="" vendor="Microsoft" version="6.1.12+fsp.4.2.0">
+    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nx_crypto" variant="" vendor="Microsoft" version="6.2.1+renesas.1.fsp.4.4.0">
       <description>Azure RTOS NetX Crypto</description>
-      <originalPack>Microsoft.NetXDuo.6.1.12+fsp.4.2.0.pack</originalPack>
+      <originalPack>Microsoft.NetXDuo.6.2.1+renesas.1.fsp.4.4.0.pack</originalPack>
     </component>
-    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nx_secure" variant="" vendor="Microsoft" version="6.1.12+fsp.4.2.0">
+    <component apiversion="" class="Azure" condition="" group="NetX Duo" subgroup="nx_secure" variant="" vendor="Microsoft" version="6.2.1+renesas.1.fsp.4.4.0">
       <description>Azure RTOS NetX Secure</description>
-      <originalPack>Microsoft.NetXDuo.6.1.12+fsp.4.2.0.pack</originalPack>
+      <originalPack>Microsoft.NetXDuo.6.2.1+renesas.1.fsp.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="RTOS" condition="" group="Azure" subgroup="ThreadX" variant="" vendor="Microsoft" version="6.2.1+fsp.4.4.0">
+      <description>Azure RTOS ThreadX</description>
+      <originalPack>Microsoft.ThreadX.6.2.1+fsp.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="device" variant="R7FA6M5BH3CFC" vendor="Renesas" version="4.4.0">
+      <description>Board support package for R7FA6M5BH3CFC</description>
+      <originalPack>Renesas.RA_mcu_ra6m5.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="device" variant="" vendor="Renesas" version="4.4.0">
+      <description>Board support package for RA6M5</description>
+      <originalPack>Renesas.RA_mcu_ra6m5.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="ra6m5" subgroup="fsp" variant="" vendor="Renesas" version="4.4.0">
+      <description>Board support package for RA6M5 - FSP Data</description>
+      <originalPack>Renesas.RA_mcu_ra6m5.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="CMSIS" condition="" group="CMSIS5" subgroup="CoreM" variant="" vendor="Arm" version="5.9.0+renesas.0.fsp.4.4.0">
+      <description>Arm CMSIS Version 5 - Core (M)</description>
+      <originalPack>Arm.CMSIS5.5.9.0+renesas.0.fsp.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="BSP" condition="" group="Board" subgroup="ra6m5_ck" variant="" vendor="Renesas" version="4.4.0">
+      <description>RA6M5-CK Board Support Files</description>
+      <originalPack>Renesas.RA_board_ra6m5_ck.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Common" condition="" group="all" subgroup="fsp_common" variant="" vendor="Renesas" version="4.4.0">
+      <description>Board Support Package Common Files</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ether_phy" variant="" vendor="Renesas" version="4.4.0">
+      <description>Ethernet PHY</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ether" variant="" vendor="Renesas" version="4.4.0">
+      <description>Ethernet</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_flash_hp" variant="" vendor="Renesas" version="4.4.0">
+      <description>Flash Memory High Performance</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_gpt" variant="" vendor="Renesas" version="4.4.0">
+      <description>General PWM Timer</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_icu" variant="" vendor="Renesas" version="4.4.0">
+      <description>External Interrupt</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_iic_master" variant="" vendor="Renesas" version="4.4.0">
+      <description>I2C Master Interface</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_ioport" variant="" vendor="Renesas" version="4.4.0">
+      <description>I/O Port</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_sce9_ra6_plaintext" variant="" vendor="Renesas" version="4.4.0">
+      <description>Secure Cryptography Engine on RA6 (SCE9) Compatibility Mode</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_sci_uart" variant="" vendor="Renesas" version="4.4.0">
+      <description>SCI UART</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_netxduo_ether" variant="" vendor="Renesas" version="4.4.0">
+      <description>NetX Duo Ethernet Driver</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_netx_secure_crypto" variant="" vendor="Renesas" version="4.4.0">
+      <description>NetX Secure Crypto H/W Acceleration</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_threadx_port" variant="" vendor="Renesas" version="4.4.0">
+      <description>Azure RTOS ThreadX Port</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_comms_i2c" variant="" vendor="Renesas" version="4.4.0">
+      <description>I2C Communications Implementation</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_hs300x" variant="" vendor="Renesas" version="4.4.0">
+      <description>HS300X Sensor Implementation</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4xxx" variant="" vendor="Renesas" version="4.4.0">
+      <description>ZMOD4XXX Sensor Implementation</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4410_iaq_1st" variant="" vendor="Renesas" version="4.4.0">
+      <description>ZMOD4XXX Sensor Lib IAQ 1st</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_zmod4510_oaq_1st" variant="" vendor="Renesas" version="4.4.0">
+      <description>ZMOD4XXX Sensor Lib OAQ 1st</description>
+      <originalPack>Renesas.RA.4.4.0.pack</originalPack>
     </component>
   </raComponentSelection>
   <raElcConfiguration/>
@@ -277,72 +282,7 @@
       <property id="module.driver.ioport.pincfg" value="g_bsp_pin_cfg"/>
     </module>
     <module id="module.middleware.rm_threadx_port.0"/>
-    <module id="module.azure.nxd_dhcp_client.130322522">
-      <property id="module.azure.nxd_dhcp_client.name" value="g_dhcp_client0"/>
-    </module>
-    <module id="module.azure.nxd.ip.248318935">
-      <property id="module.azure.nxd.ip.name" value="g_ip0"/>
-      <property id="module.azure.nxd.ip.address" value="192.168.0.2"/>
-      <property id="module.azure.nxd.ip.subnet_mask" value="255.255.255.0"/>
-      <property id="module.azure.nxd.ip.gateway_address" value="0.0.0.0"/>
-      <property id="module.azure.nxd.ipv6.address_global" value="2001:0:0:0:0:0:0:1"/>
-      <property id="module.azure.nxd.ipv6.address_local" value="0:0:0:0:0:0:0:0"/>
-      <property id="module.azure.nxd.ip.stack_size" value="2048"/>
-      <property id="module.azure.nxd.ip.priority" value="3"/>
-      <property id="module.azure.nxd.ip.arp_cache_size_units" value="module.azure.nxd.ip.arp_cache_size_units.bytes"/>
-      <property id="module.azure.nxd.ip.arp_cache_size" value="520"/>
-    </module>
-    <module id="module.azure.nxd.packet_pool.884171870">
-      <property id="module.azure.nxd.packet_pool.name" value="g_packet_pool0"/>
-      <property id="module.azure.nxd.packet_pool.packet_size" value="1568"/>
-      <property id="module.azure.nxd.packet_pool.number_of_packets" value="50"/>
-    </module>
-    <module id="module.middleware.rm_netxduo_ether.243603850">
-      <property id="module.middleware.rm_netxduo_ether.name" value="g_netxduo_ether_0"/>
-      <property id="module.middleware.rm_netxduo_ether.ip_mtu" value="1500"/>
-    </module>
-    <module id="module.driver.ether_on_ether.1868061254">
-      <property id="module.driver.ether.name" value="g_ether0"/>
-      <property id="module.driver.ether.channel" value="module.driver.ether.channel.0"/>
-      <property id="module.driver.ether.mac_address" value="00:11:22:33:44:55"/>
-      <property id="module.driver.ether.zerocopy" value="module.driver.ether.zerocopy.0"/>
-      <property id="module.driver.ether.flow_control" value="module.driver.ether.flow_control.0"/>
-      <property id="module.driver.ether.multicast" value="module.driver.ether.multicast.1"/>
-      <property id="module.driver.ether.promiscuous" value="module.driver.ether.promiscuous.0"/>
-      <property id="module.driver.ether.broadcast_filter" value="0"/>
-      <property id="module.driver.ether.num_tx_descriptors" value="1"/>
-      <property id="module.driver.ether.num_rx_descriptors" value="1"/>
-      <property id="module.driver.ether.allocate_rx_buffer" value="module.driver.ether.allocate_rx_buffer.1"/>
-      <property id="module.driver.ether.ether_buffer_size" value="1514"/>
-      <property id="module.driver.ether.padding" value="module.driver.ether.padding.0"/>
-      <property id="module.driver.ether.padding_offset" value="0"/>
-      <property id="module.driver.ether.interrupt_priority" value="board.icu.common.irq.priority12"/>
-      <property id="module.driver.ether.p_callback" value="NULL"/>
-    </module>
-    <module id="module.driver.ether_phy_on_ether_phy.1469022114">
-      <property id="module.driver.ether_phy.name" value="g_ether_phy0"/>
-      <property id="module.driver.ether_phy.channel" value="module.driver.ether_phy.channel.0"/>
-      <property id="module.driver.ether_phy.phy_lsi_address" value="5"/>
-      <property id="module.driver.ether_phy.phy_reset_wait_time" value="0x00020000"/>
-      <property id="module.driver.ether_phy.mii_type" value="module.driver.mii_type.rmii"/>
-      <property id="module.driver.ether_phy.phy_lsi_type" value="module.driver.ether_phy.phy_lsi_type.kit_component"/>
-      <property id="module.driver.ether_phy.mii_bit_access_wait_time" value="8"/>
-      <property id="module.driver.ether_phy.flow_control" value="module.driver.ether_phy.flow_control.0"/>
-    </module>
-    <module id="module.azure.nxd.common.1672621877"/>
-    <module id="module.azure.nxd.azure_iot.912950283"/>
-    <module id="module.azure.nxd_nx_secure.602663156"/>
-    <module id="module.azure.nxd_nx_crypto.781335447"/>
-    <module id="module.azure.nxd_dns_client.889888321">
-      <property id="module.azure.nxd_dns_client.name" value="g_dns0"/>
-    </module>
-    <module id="module.middleware.rm_netx_secure_crypto.1575508984"/>
-    <module id="module.driver.sce9.plaintext.2113772498"/>
-    <module id="module.azure.nxd_sntp_client.1513822242">
-      <property id="module.azure.nxd_sntp_client.name" value="g_sntp_client0"/>
-      <property id="module.azure.nxd_sntp_client.index_network_interface" value="0"/>
-    </module>
-    <module id="module.driver.external_irq_on_icu.1025463946">
+    <module id="module.driver.external_irq_on_icu.80663562">
       <property id="module.driver.external_irq.name" value="g_sensorIRQ"/>
       <property id="module.driver.external_irq.channel" value="14"/>
       <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_falling"/>
@@ -351,7 +291,7 @@
       <property id="module.driver.external_irq.p_callback" value="sensorOBIRQCallback"/>
       <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority12"/>
     </module>
-    <module id="module.driver.timer_on_gpt.486331784">
+    <module id="module.driver.timer_on_gpt.872972247">
       <property id="module.driver.timer.name" value="g_timer2"/>
       <property id="module.driver.timer.channel" value="2"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -399,7 +339,7 @@
       <property id="module.driver.timer.gtioca_disable_setting" value="module.driver.timer.gtioca_disable_setting.gtioc_disable_prohibited"/>
       <property id="module.driver.timer.gtiocb_disable_setting" value="module.driver.timer.gtiocb_disable_setting.gtioc_disable_prohibited"/>
     </module>
-    <module id="module.driver.timer_on_gpt.774725586">
+    <module id="module.driver.timer_on_gpt.976059166">
       <property id="module.driver.timer.name" value="gpt"/>
       <property id="module.driver.timer.channel" value="0"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_periodic"/>
@@ -447,75 +387,154 @@
       <property id="module.driver.timer.gtioca_disable_setting" value="module.driver.timer.gtioca_disable_setting.gtioc_disable_prohibited"/>
       <property id="module.driver.timer.gtiocb_disable_setting" value="module.driver.timer.gtiocb_disable_setting.gtioc_disable_prohibited"/>
     </module>
-    <module id="module.driver.hs300x_on_hs300x.2120579689">
+    <module id="module.azure.nxd_dhcp_client.1179773071">
+      <property id="module.azure.nxd_dhcp_client.name" value="g_dhcp_client0"/>
+    </module>
+    <module id="module.azure.nxd.ip.892399202">
+      <property id="module.azure.nxd.ip.name" value="g_ip0"/>
+      <property id="module.azure.nxd.ip.address" value="192.168.0.2"/>
+      <property id="module.azure.nxd.ip.subnet_mask" value="255.255.255.0"/>
+      <property id="module.azure.nxd.ip.gateway_address" value="0.0.0.0"/>
+      <property id="module.azure.nxd.ipv6.address_global" value="2001:0:0:0:0:0:0:1"/>
+      <property id="module.azure.nxd.ipv6.address_local" value="0:0:0:0:0:0:0:0"/>
+      <property id="module.azure.nxd.ip.stack_size" value="2048"/>
+      <property id="module.azure.nxd.ip.priority" value="3"/>
+      <property id="module.azure.nxd.ip.arp_cache_size_units" value="module.azure.nxd.ip.arp_cache_size_units.bytes"/>
+      <property id="module.azure.nxd.ip.arp_cache_size" value="520"/>
+    </module>
+    <module id="module.azure.nxd.packet_pool.20399368">
+      <property id="module.azure.nxd.packet_pool.name" value="g_packet_pool0"/>
+      <property id="module.azure.nxd.packet_pool.packet_size" value="1568"/>
+      <property id="module.azure.nxd.packet_pool.number_of_packets" value="50"/>
+    </module>
+    <module id="module.middleware.rm_netxduo_ether.1641516958">
+      <property id="module.middleware.rm_netxduo_ether.name" value="g_netxduo_ether_0"/>
+      <property id="module.middleware.rm_netxduo_ether.ip_mtu" value="1500"/>
+    </module>
+    <module id="module.driver.ether_on_ether.1909809362">
+      <property id="module.driver.ether.name" value="g_ether0"/>
+      <property id="module.driver.ether.channel" value="module.driver.ether.channel.0"/>
+      <property id="module.driver.ether.mac_address" value="00:11:22:33:44:55"/>
+      <property id="module.driver.ether.zerocopy" value="module.driver.ether.zerocopy.0"/>
+      <property id="module.driver.ether.flow_control" value="module.driver.ether.flow_control.0"/>
+      <property id="module.driver.ether.multicast" value="module.driver.ether.multicast.1"/>
+      <property id="module.driver.ether.promiscuous" value="module.driver.ether.promiscuous.0"/>
+      <property id="module.driver.ether.broadcast_filter" value="0"/>
+      <property id="module.driver.ether.num_tx_descriptors" value="1"/>
+      <property id="module.driver.ether.num_rx_descriptors" value="1"/>
+      <property id="module.driver.ether.allocate_rx_buffer" value="module.driver.ether.allocate_rx_buffer.1"/>
+      <property id="module.driver.ether.ether_buffer_size" value="1514"/>
+      <property id="module.driver.ether.padding" value="module.driver.ether.padding.0"/>
+      <property id="module.driver.ether.padding_offset" value="0"/>
+      <property id="module.driver.ether.interrupt_priority" value="board.icu.common.irq.priority12"/>
+      <property id="module.driver.ether.p_callback" value="NULL"/>
+    </module>
+    <module id="module.driver.ether_phy_on_ether_phy.199971907">
+      <property id="module.driver.ether_phy.name" value="g_ether_phy0"/>
+      <property id="module.driver.ether_phy.channel" value="module.driver.ether_phy.channel.0"/>
+      <property id="module.driver.ether_phy.phy_lsi_address" value="5"/>
+      <property id="module.driver.ether_phy.phy_reset_wait_time" value="0x00020000"/>
+      <property id="module.driver.ether_phy.mii_type" value="module.driver.mii_type.rmii"/>
+      <property id="module.driver.ether_phy.phy_lsi_type" value="module.driver.ether_phy.phy_lsi_type.kit_component"/>
+      <property id="module.driver.ether_phy.mii_bit_access_wait_time" value="8"/>
+      <property id="module.driver.ether_phy.flow_control" value="module.driver.ether_phy.flow_control.0"/>
+    </module>
+    <module id="module.azure.nxd.common.2012854297"/>
+    <module id="module.azure.nxd.azure_iot.225885482"/>
+    <module id="module.azure.nxd_nx_secure.1820517187"/>
+    <module id="module.azure.nxd_nx_crypto.51818322"/>
+    <module id="module.azure.nxd_dns_client.434317495">
+      <property id="module.azure.nxd_dns_client.name" value="g_dns0"/>
+    </module>
+    <module id="module.middleware.rm_netx_secure_crypto.1804756038"/>
+    <module id="module.driver.sce9.plaintext.843962230"/>
+    <module id="module.azure.nxd_sntp_client.468122468">
+      <property id="module.azure.nxd_sntp_client.name" value="g_sntp_client0"/>
+      <property id="module.azure.nxd_sntp_client.index_network_interface" value="0"/>
+    </module>
+    <module id="module.driver.hs300x_on_hs300x.356452538">
       <property id="module.driver.hs300x.name" value="g_hs300x_sensor0"/>
       <property id="module.driver.hs300x.p_callback" value="hs300x_callback"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.1911335804">
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.1022582467">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device0"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x00"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="comms_i2c_callback"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_bus.1118655782">
+    <module id="module.driver.comms_i2c_on_comms_i2c_bus.476499166">
       <property id="module.driver.comms_i2c_bus.name" value="g_comms_i2c_bus0"/>
       <property id="module.driver.comms_i2c_bus.bus_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_bus.blocking_semaphore" value="module.driver.comms_i2c_bus.blocking_semaphore.use"/>
       <property id="module.driver.comms_i2c_bus.bus_recursive_mutex" value="module.driver.comms_i2c_bus.bus_recursive_mutex.use"/>
     </module>
-    <module id="module.driver.zmod4xxx_on_zmod4xxx.1961586579">
+    <module id="module.driver.i2c_on_iic_master.298546187">
+      <property id="module.driver.i2c_master.name" value="g_i2c_master0"/>
+      <property id="module.driver.i2c_master.channel" value="0"/>
+      <property id="module.driver.i2c_master.rate" value="module.driver.i2c_master.rate.rate_fast"/>
+      <property id="module.driver.i2c_master.rise_time_ns" value="120"/>
+      <property id="module.driver.i2c_master.fall_time_ns" value="120"/>
+      <property id="module.driver.i2c_master.duty" value="50"/>
+      <property id="module.driver.i2c_master.slave" value="0x00"/>
+      <property id="module.driver.i2c_master.addr_mode" value="module.driver.i2c_master.addr_mode.addr_mode_7bit"/>
+      <property id="module.driver.i2c_master.timeout_mode" value="module.driver.i2c_master.timeout_mode.short_mode"/>
+      <property id="module.driver.i2c_master.timeout_scl_low" value="module.driver.i2c_master.timeout_scl_low.enabled"/>
+      <property id="module.driver.i2c_master.p_callback" value="NULL"/>
+      <property id="module.driver.i2c_master.ipl" value="board.icu.common.irq.priority12"/>
+    </module>
+    <module id="module.driver.zmod4xxx_on_zmod4xxx.1064478472">
       <property id="module.driver.zmod4xxx.name" value="g_zmod4xxx_sensor0"/>
       <property id="module.driver.zmod4xxx.p_callback" value="zmod4xxx_comms_i2c0_callback"/>
       <property id="module.driver.zmod4xxx.p_irq_callback" value="zmod4xxx_irq0_callback"/>
     </module>
-    <module id="module.driver.zmod4410_iaq_1st_on_zmod4xxx.1195330645">
+    <module id="module.driver.zmod4410_iaq_1st_on_zmod4xxx.590801390">
       <property id="module.driver.zmod4xxx_lib.operation_mode" value="module.driver.zmod4xxx_lib.operation_mode.continuous"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.986957746">
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.1507946303">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device1"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x00"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="comms_i2c_callback"/>
     </module>
-    <module id="module.driver.external_irq_on_icu.1571644523">
+    <module id="module.driver.external_irq_on_icu.1044916528">
       <property id="module.driver.external_irq.name" value="g_external_irq0"/>
       <property id="module.driver.external_irq.channel" value="4"/>
-      <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_falling"/>
+      <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_rising"/>
       <property id="module.driver.external_irq.filter_enable" value="module.driver.external_irq.filter_enable.false"/>
       <property id="module.driver.external_irq.pclk_div" value="module.driver.external_irq.pclk_div.pclk_div_by_64"/>
       <property id="module.driver.external_irq.p_callback" value="NULL"/>
       <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority5"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.463622749">
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.1355830167">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device4"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x63"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="ICP_comms_i2c_callback"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.1404448631">
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.425861314">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device5"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x68"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="ICM_comms_i2c_callback"/>
     </module>
-    <module id="module.driver.zmod4xxx_on_zmod4xxx.1638852982">
+    <module id="module.driver.zmod4xxx_on_zmod4xxx.1608011045">
       <property id="module.driver.zmod4xxx.name" value="g_zmod4xxx_sensor1"/>
       <property id="module.driver.zmod4xxx.p_callback" value="zmod4xxx_comms_i2c1_callback"/>
       <property id="module.driver.zmod4xxx.p_irq_callback" value="zmod4xxx_irq1_callback"/>
     </module>
-    <module id="module.driver.zmod4510_oaq_1st_on_zmod4xxx.156730829"/>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.1795737399">
+    <module id="module.driver.zmod4510_oaq_1st_on_zmod4xxx.1914023622"/>
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.1825768042">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device2"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x00"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="comms_i2c_callback"/>
     </module>
-    <module id="module.driver.external_irq_on_icu.642506057">
+    <module id="module.driver.external_irq_on_icu.1046302222">
       <property id="module.driver.external_irq.name" value="g_external_irq1"/>
       <property id="module.driver.external_irq.channel" value="15"/>
       <property id="module.driver.external_irq.trigger" value="module.driver.external_irq.trigger.trig_falling"/>
@@ -524,14 +543,14 @@
       <property id="module.driver.external_irq.p_callback" value="NULL"/>
       <property id="module.driver.external_irq.ipl" value="board.icu.common.irq.priority12"/>
     </module>
-    <module id="module.driver.comms_i2c_on_comms_i2c_device.768135759">
+    <module id="module.driver.comms_i2c_on_comms_i2c_device.2046749874">
       <property id="module.driver.comms_i2c_device.name" value="g_comms_i2c_device3"/>
       <property id="module.driver.comms_i2c_device.semaphore_timeout" value="0xFFFFFFFF"/>
       <property id="module.driver.comms_i2c_device.slave_address" value="0x53"/>
       <property id="module.driver.comms_i2c_device.address_mode" value="module.driver.comms_i2c_device.address_mode.address_mode_7bit"/>
       <property id="module.driver.comms_i2c_device.p_callback" value="comms_i2c_callback"/>
     </module>
-    <module id="module.driver.uart_on_sci_uart.1411718450">
+    <module id="module.driver.uart_on_sci_uart.912047153">
       <property id="module.driver.uart.name" value="g_console_uart"/>
       <property id="module.driver.uart.channel" value="5"/>
       <property id="module.driver.uart.data_bits" value="module.driver.uart.data_bits.data_bits_8"/>
@@ -557,34 +576,20 @@
       <property id="module.driver.uart.tei_ipl" value="board.icu.common.irq.priority12"/>
       <property id="module.driver.uart.eri_ipl" value="board.icu.common.irq.priority12"/>
     </module>
-    <module id="module.driver.flash_on_flash_hp.837541723">
+    <module id="module.driver.flash_on_flash_hp.413753086">
       <property id="module.driver.flash.name" value="user_flash"/>
       <property id="module.driver.flash.data_flash_bgo" value="module.driver.flash.data_flash_bgo.disabled"/>
       <property id="module.driver.flash.p_callback" value="flash_callback"/>
       <property id="module.driver.flash.ipl" value="board.icu.common.irq.priority6"/>
       <property id="module.driver.flash.err_ipl" value="board.icu.common.irq.priority6"/>
     </module>
-    <module id="module.driver.i2c_on_iic_master.815230676">
-      <property id="module.driver.i2c_master.name" value="g_i2c_master0"/>
-      <property id="module.driver.i2c_master.channel" value="0"/>
-      <property id="module.driver.i2c_master.rate" value="module.driver.i2c_master.rate.rate_fast"/>
-      <property id="module.driver.i2c_master.rise_time_ns" value="120"/>
-      <property id="module.driver.i2c_master.fall_time_ns" value="120"/>
-      <property id="module.driver.i2c_master.duty" value="50"/>
-      <property id="module.driver.i2c_master.slave" value="0x00"/>
-      <property id="module.driver.i2c_master.addr_mode" value="module.driver.i2c_master.addr_mode.addr_mode_7bit"/>
-      <property id="module.driver.i2c_master.timeout_mode" value="module.driver.i2c_master.timeout_mode.short_mode"/>
-      <property id="module.driver.i2c_master.timeout_scl_low" value="module.driver.i2c_master.timeout_scl_low.enabled"/>
-      <property id="module.driver.i2c_master.p_callback" value="NULL"/>
-      <property id="module.driver.i2c_master.ipl" value="board.icu.common.irq.priority12"/>
-    </module>
-    <object id="rtos.threadx.object.queue.67352098">
+    <object id="rtos.threadx.object.queue.1912135951">
       <property id="rtos.threadx.object.queue.name" value="Topic Queue"/>
       <property id="rtos.threadx.object.queue.symbol" value="g_topic_queue"/>
       <property id="rtos.threadx.object.queue.msg_size" value="16"/>
       <property id="rtos.threadx.object.queue.queue_size" value="64"/>
     </object>
-    <object id="rtos.threadx.object.mutex.1619351712">
+    <object id="rtos.threadx.object.mutex.1823088231">
       <property id="rtos.threadx.object.mutex.name" value="consolprint_mutex"/>
       <property id="rtos.threadx.object.mutex.symbol" value="consolprint_mutex"/>
       <property id="rtos.threadx.object.mutex.inherit" value="rtos.threadx.object.mutex.inherit.disabled"/>
@@ -592,65 +597,65 @@
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.middleware.rm_threadx_port.0"/>
-      <stack module="module.driver.external_irq_on_icu.1025463946"/>
-      <stack module="module.driver.timer_on_gpt.486331784"/>
-      <stack module="module.driver.timer_on_gpt.774725586"/>
+      <stack module="module.driver.external_irq_on_icu.80663562"/>
+      <stack module="module.driver.timer_on_gpt.872972247"/>
+      <stack module="module.driver.timer_on_gpt.976059166"/>
     </context>
-    <context id="rtos.threadx.thread.1351809697">
+    <context id="rtos.threadx.thread.948600823">
       <property id="_symbol" value="application_thread"/>
       <property id="rtos.threadx.thread.name" value="Application Thread"/>
       <property id="rtos.threadx.thread.stack" value="0x2400"/>
       <property id="rtos.threadx.thread.priority" value="1"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="25"/>
-      <stack module="module.azure.nxd_dhcp_client.130322522">
-        <stack module="module.azure.nxd.ip.248318935" requires="module.azure.nxd_dhcp_client.requires.nxd.ip">
-          <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
-          <stack module="module.middleware.rm_netxduo_ether.243603850" requires="module.azure.nxd.ip.requires.nxd.driver">
-            <stack module="module.driver.ether_on_ether.1868061254" requires="module.middleware.rm_netxduo_ether.requires.ether">
-              <stack module="module.driver.ether_phy_on_ether_phy.1469022114" requires="module.driver.ether.requires.ether_phy"/>
+      <stack module="module.azure.nxd_dhcp_client.1179773071">
+        <stack module="module.azure.nxd.ip.892399202" requires="module.azure.nxd_dhcp_client.requires.nxd.ip">
+          <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
+          <stack module="module.middleware.rm_netxduo_ether.1641516958" requires="module.azure.nxd.ip.requires.nxd.driver">
+            <stack module="module.driver.ether_on_ether.1909809362" requires="module.middleware.rm_netxduo_ether.requires.ether">
+              <stack module="module.driver.ether_phy_on_ether_phy.199971907" requires="module.driver.ether.requires.ether_phy"/>
             </stack>
-            <stack module="module.azure.nxd.common.1672621877" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
+            <stack module="module.azure.nxd.common.2012854297" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
           </stack>
         </stack>
-        <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd_dhcp_client.requires.nxd.packet_pool"/>
+        <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd_dhcp_client.requires.nxd.packet_pool"/>
       </stack>
-      <stack module="module.azure.nxd.azure_iot.912950283">
-        <stack module="module.azure.nxd_nx_secure.602663156" requires="module.azure.nxd.azure_iot.requires.nx_secure">
-          <stack module="module.azure.nxd_nx_crypto.781335447" requires="module.azure.nxd_nx_secure.requires.nx_crypto">
-            <stack module="module.middleware.rm_netx_secure_crypto.1575508984" requires="module.azure.nxd_nx_crypto.requires.nx_crypto_implementation">
-              <stack module="module.driver.sce9.plaintext.2113772498" requires="module.middleware.rm_netx_secure_crypto.requires.sce_for_nx"/>
+      <stack module="module.azure.nxd.azure_iot.225885482">
+        <stack module="module.azure.nxd_nx_secure.1820517187" requires="module.azure.nxd.azure_iot.requires.nx_secure">
+          <stack module="module.azure.nxd_nx_crypto.51818322" requires="module.azure.nxd_nx_secure.requires.nx_crypto">
+            <stack module="module.middleware.rm_netx_secure_crypto.1804756038" requires="module.azure.nxd_nx_crypto.requires.nx_crypto_implementation">
+              <stack module="module.driver.sce9.plaintext.843962230" requires="module.middleware.rm_netx_secure_crypto.requires.sce_for_nx"/>
             </stack>
           </stack>
-          <stack module="module.azure.nxd.common.1672621877" requires="module.azure.nxd_nx_secure.requires.nxd.common"/>
+          <stack module="module.azure.nxd.common.2012854297" requires="module.azure.nxd_nx_secure.requires.nxd.common"/>
         </stack>
-        <stack module="module.azure.nxd_dns_client.889888321" requires="module.azure.nxd.azure_iot.requires.nx_dns_client">
-          <stack module="module.azure.nxd.ip.248318935" requires="module.azure.nxd_dns_client.requires.nxd.ip">
-            <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
-            <stack module="module.middleware.rm_netxduo_ether.243603850" requires="module.azure.nxd.ip.requires.nxd.driver">
-              <stack module="module.driver.ether_on_ether.1868061254" requires="module.middleware.rm_netxduo_ether.requires.ether">
-                <stack module="module.driver.ether_phy_on_ether_phy.1469022114" requires="module.driver.ether.requires.ether_phy"/>
+        <stack module="module.azure.nxd_dns_client.434317495" requires="module.azure.nxd.azure_iot.requires.nx_dns_client">
+          <stack module="module.azure.nxd.ip.892399202" requires="module.azure.nxd_dns_client.requires.nxd.ip">
+            <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
+            <stack module="module.middleware.rm_netxduo_ether.1641516958" requires="module.azure.nxd.ip.requires.nxd.driver">
+              <stack module="module.driver.ether_on_ether.1909809362" requires="module.middleware.rm_netxduo_ether.requires.ether">
+                <stack module="module.driver.ether_phy_on_ether_phy.199971907" requires="module.driver.ether.requires.ether_phy"/>
               </stack>
-              <stack module="module.azure.nxd.common.1672621877" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
+              <stack module="module.azure.nxd.common.2012854297" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
             </stack>
           </stack>
-          <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd_dhcp_client.requires.nxd.packet_pool"/>
+          <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd_dhcp_client.requires.nxd.packet_pool"/>
         </stack>
       </stack>
-      <stack module="module.azure.nxd_sntp_client.1513822242">
-        <stack module="module.azure.nxd.ip.248318935" requires="module.azure.nxd_sntp_client.requires.nxd.ip">
-          <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
-          <stack module="module.middleware.rm_netxduo_ether.243603850" requires="module.azure.nxd.ip.requires.nxd.driver">
-            <stack module="module.driver.ether_on_ether.1868061254" requires="module.middleware.rm_netxduo_ether.requires.ether">
-              <stack module="module.driver.ether_phy_on_ether_phy.1469022114" requires="module.driver.ether.requires.ether_phy"/>
+      <stack module="module.azure.nxd_sntp_client.468122468">
+        <stack module="module.azure.nxd.ip.892399202" requires="module.azure.nxd_sntp_client.requires.nxd.ip">
+          <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd.ip.requires.nxd.packet_pool"/>
+          <stack module="module.middleware.rm_netxduo_ether.1641516958" requires="module.azure.nxd.ip.requires.nxd.driver">
+            <stack module="module.driver.ether_on_ether.1909809362" requires="module.middleware.rm_netxduo_ether.requires.ether">
+              <stack module="module.driver.ether_phy_on_ether_phy.199971907" requires="module.driver.ether.requires.ether_phy"/>
             </stack>
-            <stack module="module.azure.nxd.common.1672621877" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
+            <stack module="module.azure.nxd.common.2012854297" requires="module.middleware.rm_netxduo_ether.requires.nxd.common"/>
           </stack>
         </stack>
-        <stack module="module.azure.nxd.packet_pool.884171870" requires="module.azure.nxd_sntp_client.requires.nxd.packet_pool"/>
+        <stack module="module.azure.nxd.packet_pool.20399368" requires="module.azure.nxd_sntp_client.requires.nxd.packet_pool"/>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.1351998175">
+    <context id="rtos.threadx.thread.1501143341">
       <property id="_symbol" value="c2d_thread"/>
       <property id="rtos.threadx.thread.name" value="Cloud2Device Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
@@ -658,107 +663,107 @@
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="25"/>
     </context>
-    <context id="rtos.threadx.thread.1814876180">
+    <context id="rtos.threadx.thread.2081747556">
       <property id="_symbol" value="HS3001_Thread"/>
       <property id="rtos.threadx.thread.name" value="HS3001_Thread"/>
       <property id="rtos.threadx.thread.stack" value="4096"/>
       <property id="rtos.threadx.thread.priority" value="3"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="1"/>
-      <stack module="module.driver.hs300x_on_hs300x.2120579689">
-        <stack module="module.driver.comms_i2c_on_comms_i2c_device.1911335804" requires="module.driver.hs300x.requires.comms_i2c_device">
-          <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-            <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.hs300x_on_hs300x.356452538">
+        <stack module="module.driver.comms_i2c_on_comms_i2c_device.1022582467" requires="module.driver.hs300x.requires.comms_i2c_device">
+          <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+            <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
           </stack>
         </stack>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.1547248645">
+    <context id="rtos.threadx.thread.443509190">
       <property id="_symbol" value="ZMOD4410_Thread"/>
       <property id="rtos.threadx.thread.name" value="ZMOD4410_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
       <property id="rtos.threadx.thread.priority" value="3"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="1"/>
-      <stack module="module.driver.zmod4xxx_on_zmod4xxx.1961586579">
-        <stack module="module.driver.zmod4410_iaq_1st_on_zmod4xxx.1195330645" requires="module.driver.zmod4xxx.requires.zmod4xxx_lib">
-          <stack module="module.driver.comms_i2c_on_comms_i2c_device.986957746" requires="module.driver.zmod4xxx.requires.comms_i2c_device">
-            <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-              <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.zmod4xxx_on_zmod4xxx.1064478472">
+        <stack module="module.driver.zmod4410_iaq_1st_on_zmod4xxx.590801390" requires="module.driver.zmod4xxx.requires.zmod4xxx_lib">
+          <stack module="module.driver.comms_i2c_on_comms_i2c_device.1507946303" requires="module.driver.zmod4xxx.requires.comms_i2c_device">
+            <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+              <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
             </stack>
           </stack>
         </stack>
-        <stack module="module.driver.external_irq_on_icu.1571644523" requires="module.driver.zmod4xxx.requires.irq"/>
+        <stack module="module.driver.external_irq_on_icu.1044916528" requires="module.driver.zmod4xxx.requires.irq"/>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.392266892">
+    <context id="rtos.threadx.thread.497900503">
       <property id="_symbol" value="ICP_Thread"/>
       <property id="rtos.threadx.thread.name" value="ICP_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
       <property id="rtos.threadx.thread.priority" value="3"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="1"/>
-      <stack module="module.driver.comms_i2c_on_comms_i2c_device.463622749">
-        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-          <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.comms_i2c_on_comms_i2c_device.1355830167">
+        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+          <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
         </stack>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.1615765335">
+    <context id="rtos.threadx.thread.2026030854">
       <property id="_symbol" value="ICM_Thread"/>
       <property id="rtos.threadx.thread.name" value="ICM_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
       <property id="rtos.threadx.thread.priority" value="3"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="1"/>
-      <stack module="module.driver.comms_i2c_on_comms_i2c_device.1404448631">
-        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-          <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.comms_i2c_on_comms_i2c_device.425861314">
+        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+          <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
         </stack>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.1113610918">
+    <context id="rtos.threadx.thread.592946691">
       <property id="_symbol" value="ZMOD4510_Thread"/>
       <property id="rtos.threadx.thread.name" value="ZMOD4510_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
-      <property id="rtos.threadx.thread.priority" value="2"/>
+      <property id="rtos.threadx.thread.priority" value="3"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="1"/>
-      <stack module="module.driver.zmod4xxx_on_zmod4xxx.1638852982">
-        <stack module="module.driver.zmod4510_oaq_1st_on_zmod4xxx.156730829" requires="module.driver.zmod4xxx.requires.zmod4xxx_lib">
-          <stack module="module.driver.comms_i2c_on_comms_i2c_device.1795737399" requires="module.driver.zmod4xxx.requires.comms_i2c_device">
-            <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-              <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.zmod4xxx_on_zmod4xxx.1608011045">
+        <stack module="module.driver.zmod4510_oaq_1st_on_zmod4xxx.1914023622" requires="module.driver.zmod4xxx.requires.zmod4xxx_lib">
+          <stack module="module.driver.comms_i2c_on_comms_i2c_device.1825768042" requires="module.driver.zmod4xxx.requires.comms_i2c_device">
+            <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+              <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
             </stack>
           </stack>
         </stack>
-        <stack module="module.driver.external_irq_on_icu.642506057" requires="module.driver.zmod4xxx.requires.irq"/>
+        <stack module="module.driver.external_irq_on_icu.1046302222" requires="module.driver.zmod4xxx.requires.irq"/>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.230262450">
+    <context id="rtos.threadx.thread.132549721">
       <property id="_symbol" value="OB_1203_Thread"/>
       <property id="rtos.threadx.thread.name" value="OB_1203_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
       <property id="rtos.threadx.thread.priority" value="2"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.disabled"/>
       <property id="rtos.threadx.thread.timeslice" value="25"/>
-      <stack module="module.driver.comms_i2c_on_comms_i2c_device.768135759">
-        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.1118655782" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
-          <stack module="module.driver.i2c_on_iic_master.815230676" requires="module.driver.comms_i2c_bus.requires.i2c"/>
+      <stack module="module.driver.comms_i2c_on_comms_i2c_device.2046749874">
+        <stack module="module.driver.comms_i2c_on_comms_i2c_bus.476499166" requires="module.driver.comms_i2c_device.requires.comms_i2c_bus">
+          <stack module="module.driver.i2c_on_iic_master.298546187" requires="module.driver.comms_i2c_bus.requires.i2c"/>
         </stack>
       </stack>
     </context>
-    <context id="rtos.threadx.thread.266966734">
+    <context id="rtos.threadx.thread.699758518">
       <property id="_symbol" value="Console_Thread"/>
       <property id="rtos.threadx.thread.name" value="Console_Thread"/>
       <property id="rtos.threadx.thread.stack" value="4096"/>
       <property id="rtos.threadx.thread.priority" value="4"/>
       <property id="rtos.threadx.thread.autostart" value="rtos.threadx.thread.autostart.enabled"/>
       <property id="rtos.threadx.thread.timeslice" value="50"/>
-      <stack module="module.driver.uart_on_sci_uart.1411718450"/>
-      <stack module="module.driver.flash_on_flash_hp.837541723"/>
+      <stack module="module.driver.uart_on_sci_uart.912047153"/>
+      <stack module="module.driver.flash_on_flash_hp.413753086"/>
     </context>
-    <context id="rtos.threadx.thread.141878192">
+    <context id="rtos.threadx.thread.567080182">
       <property id="_symbol" value="CommandRX_Thread"/>
       <property id="rtos.threadx.thread.name" value="CommandRX_Thread"/>
       <property id="rtos.threadx.thread.stack" value="2048"/>
@@ -1188,6 +1193,7 @@
       <property id="config.azure.nxd_web_http_server.retry_shift" value="1"/>
       <property id="config.azure.nxd_src.hardware_tcp_ip" value="config.azure.nxd_src.hardware_tcp_ip.disable"/>
       <property id="config.azure.nxd_src.interface_capability" value="config.azure.nxd_src.interface_capability.disable"/>
+      <property id="config.azure.nxd_azure_iot.security_module" value="config.azure.nxd_azure_iot.security_module.disable"/>
     </config>
     <config id="config.driver.sci_uart">
       <property id="config.driver.sci_uart.param_checking_enable" value="config.driver.sci_uart.param_checking_enable.bsp"/>
@@ -1253,7 +1259,7 @@
       <property id="config.azure.nxd_nx_secure.enable_legacy_tls_v_10" value="config.azure.nxd_nx_secure.enable_legacy_tls_v_10.Enable"/>
       <property id="config.azure.nxd_nx_secure.enable_legacy_tls_v_11" value="config.azure.nxd_nx_secure.enable_legacy_tls_v_11.Enable"/>
       <property id="config.azure.nxd_nx_secure.disable_tls_v_1_1_mode" value="config.azure.nxd_nx_secure.disable_tls_v_1_1_mode.Enable"/>
-      <property id="config.azure.nxd_nx_secure.disable_server" value="config.azure.nxd_nx_secure.disable_server.Enable"/>
+      <property id="config.azure.nxd_nx_secure.disable_server" value="config.azure.nxd_nx_secure.disable_server.Disable"/>
       <property id="config.azure.nxd_nx_secure.disable_client" value="config.azure.nxd_nx_secure.disable_client.Enable"/>
       <property id="config.azure.nxd_nx_secure.disable_error_checking" value="config.azure.nxd_nx_secure.disable_error_checking.Enable"/>
       <property id="config.azure.nxd_nx_secure.dtls" value="config.azure.nxd_nx_secure.dtls.Disable"/>
@@ -1645,7 +1651,6 @@
       <configSetting altId="usbfs0.ovrcura.pa08" configurationId="usbfs0.ovrcura"/>
       <configSetting altId="usbfs0.vbus.p407" configurationId="usbfs0.vbus"/>
       <configSetting altId="usbfs0.vbusen.p615" configurationId="usbfs0.vbusen"/>
-      <lockSetting id="irq0.irq04" lock="true"/>
     </pincfg>
     <pincfg active="false" name="R7FA6M5BH3CFC.pincfg" selected="false" symbol="">
       <configSetting altId="debug0.mode.swd" configurationId="debug0.mode"/>

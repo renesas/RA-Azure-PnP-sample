@@ -29,10 +29,10 @@ extern   "C" {
 /*
 TODO`s: Configure core settings of application for your IoTHub.
 */
-#define SAMPLE_PNP_MODEL_ID "dtmi:renesas:ra:ckra6m5:AZCKRA6M5ETH;1"
+#define SAMPLE_PNP_MODEL_ID             "dtmi:renesas:ra:ckra6m5:AZCKRA6M5ETH;1"
 #define SAMPLE_PNP_DPS_PAYLOAD          "{\"modelId\":\"" SAMPLE_PNP_MODEL_ID "\"}"
 /* Defined, DPS is enabled.  */
-#define ENABLE_DPS_SAMPLE
+//#define ENABLE_DPS_SAMPLE
 /* Defined, telemetry is disabled.  */
 #define DISABLE_TELEMETRY_SAMPLE
 /* Defined, C2D is disabled.  */
@@ -48,12 +48,12 @@ TODO`s: Configure core settings of application for your IoTHub.
 /* These values can be picked from device connection string which is of format : HostName=<host1>;DeviceId=<device1>;SharedAccessKey=<key1>
    HOST_NAME can be set to <host1>,   DEVICE_ID can be set to <device1>,    DEVICE_SYMMETRIC_KEY can be set to <key1>.  */
 #ifndef HOST_NAME
-#define HOST_NAME                                   "TECLOUDHUB.azure-devices.net"
+#define HOST_NAME                                   ""
 
 #endif /* HOST_NAME */
 
 #ifndef DEVICE_ID
-#define DEVICE_ID                                "CK_RA6M5_X509"
+#define DEVICE_ID                                ""
 
 #endif /* DEVICE_ID */
 
@@ -68,7 +68,7 @@ TODO`s: Configure core settings of application for your IoTHub.
 #endif /* ID_SCOPE */
 
 #ifndef REGISTRATION_ID
-#define REGISTRATION_ID                             "dfd530de-735d-4af0-b19b-8f77468c4370"
+#define REGISTRATION_ID                             "e4d5d938-bfb0-48cc-b097-4246da7098f2"
 #endif /* REGISTRATION_ID */
 
 #endif /* ENABLE_DPS_SAMPLE */
@@ -76,10 +76,10 @@ TODO`s: Configure core settings of application for your IoTHub.
 /* Optional SYMMETRIC KEY.  */
 #ifndef DEVICE_SYMMETRIC_KEY
 #ifndef ENABLE_DPS_SAMPLE
-/* IOT HUB */ #define DEVICE_SYMMETRIC_KEY                "acV1Ypr2nB/yxdw7ugNO0V9iRWetZLvIHa88jNGxocA="
+/* IOT HUB */ #define DEVICE_SYMMETRIC_KEY                "0EF05lWwYA/AswNUeZLImMo/UQiVwWGNVc+TK855pzw="
 
 #else /* !ENABLE_DPS_SAMPLE */
-/* DPS  */    #define DEVICE_SYMMETRIC_KEY                       "fbDvZIXRJxzgTNfJGZ7YftA4q75Wx4ua/EN6ExRK8dk=" //"WuEbq/iOT/a7lDd+5xf/ugjZ2ZhvjAcFE13bFtciBUo="
+/* DPS  */    #define DEVICE_SYMMETRIC_KEY                "HvmA47ISezh3bY5Fqn0SCxETExkDBTWusXqOX1LHER0=" //"WuEbq/iOT/a7lDd+5xf/ugjZ2ZhvjAcFE13bFtciBUo="
 #endif /* ENABLE_DPS_SAMPLE */
 #endif /* DEVICE_SYMMETRIC_KEY */
 

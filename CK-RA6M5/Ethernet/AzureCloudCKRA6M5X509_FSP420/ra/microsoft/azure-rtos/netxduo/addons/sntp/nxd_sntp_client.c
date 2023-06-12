@@ -85,7 +85,7 @@ static ULONG process_timerticks = 0;
 /*  FUNCTION                                               RELEASE        */ 
 /*                                                                        */ 
 /*    _nxe_sntp_client_create                             PORTABLE C      */ 
-/*                                                           6.1          */
+/*                                                           6.2.1        */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Yuxin Zhou, Microsoft Corporation                                   */
@@ -126,6 +126,9 @@ static ULONG process_timerticks = 0;
 /*  05-19-2020     Yuxin Zhou               Initial Version 6.0           */
 /*  09-30-2020     Yuxin Zhou               Modified comment(s),          */
 /*                                            resulting in version 6.1    */
+/*  03-08-2023     Wenhui Xie               Modified comment(s),          */
+/*                                            checked the client ID,      */
+/*                                            resulting in version 6.2.1  */
 /*                                                                        */
 /**************************************************************************/
 UINT  _nxe_sntp_client_create(NX_SNTP_CLIENT *client_ptr, NX_IP *ip_ptr, UINT iface_index, NX_PACKET_POOL *packet_pool_ptr,   
@@ -143,6 +146,14 @@ UINT status;
 
         /* Return error status.  */
        return(NX_PTR_ERROR);
+    }
+
+    /* Check for the client ID.  */
+    if ((client_ptr == NX_NULL) || (client_ptr -> nx_sntp_client_id == NXD_SNTP_ID))
+    {
+
+        /* Return error status.  */
+        return(NX_PTR_ERROR);
     }
 
     /* Check for invalid network interface input. */
@@ -449,7 +460,7 @@ UINT status;
 /*  FUNCTION                                               RELEASE        */ 
 /*                                                                        */ 
 /*    _nx_sntp_client_delete                              PORTABLE C      */ 
-/*                                                           6.1          */
+/*                                                           6.2.1        */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Yuxin Zhou, Microsoft Corporation                                   */
@@ -489,10 +500,16 @@ UINT status;
 /*  05-19-2020     Yuxin Zhou               Initial Version 6.0           */
 /*  09-30-2020     Yuxin Zhou               Modified comment(s),          */
 /*                                            resulting in version 6.1    */
+/*  03-08-2023     Wenhui Xie               Modified comment(s),          */
+/*                                            cleared the client ID,      */
+/*                                            resulting in version 6.2.1  */
 /*                                                                        */
 /**************************************************************************/
 UINT  _nx_sntp_client_delete(NX_SNTP_CLIENT *client_ptr)
 {
+
+    /* Clear the client ID.  */
+    client_ptr -> nx_sntp_client_id = 0;
 
     /* Suspend the SNTP Client thread.  */
     tx_thread_suspend(&client_ptr -> nx_sntp_client_thread);
@@ -4849,7 +4866,7 @@ UINT status;
 /*  FUNCTION                                               RELEASE        */ 
 /*                                                                        */ 
 /*    _nx_sntp_client_utility_display_date_time           PORTABLE C      */ 
-/*                                                           6.1.8        */
+/*                                                           6.2.0        */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Yuxin Zhou, Microsoft Corporation                                   */
@@ -4896,6 +4913,9 @@ UINT status;
 /*                                            improved the logic of       */
 /*                                            converting number to string,*/
 /*                                            resulting in version 6.1.8  */
+/*  10-31-2022     Yuxin Zhou               Modified comment(s), fixed    */
+/*                                            the typo of August string,  */
+/*                                            resulting in version 6.2.0  */
 /*                                                                        */
 /**************************************************************************/
 UINT _nx_sntp_client_utility_display_date_time(NX_SNTP_CLIENT *client_ptr, CHAR *buffer, UINT length)
@@ -4906,7 +4926,7 @@ UINT                offset;
 UINT                return_length;
 NX_SNTP_DATE_TIME   DisplayTime;
 const CHAR         *months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                  "Jul", "Aud", "Sep", "Oct", "Nov", "Dec"};
+                                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 
 #ifndef  NX_SNTP_CURRENT_YEAR  

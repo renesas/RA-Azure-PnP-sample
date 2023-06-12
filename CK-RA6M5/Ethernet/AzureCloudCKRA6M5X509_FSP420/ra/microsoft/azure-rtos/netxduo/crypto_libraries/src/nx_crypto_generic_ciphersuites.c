@@ -29,7 +29,7 @@
 /*  FUNCTION                                               RELEASE        */
 /*                                                                        */
 /*    nx_crypto_generic_ciphersuites                      PORTABLE C      */
-/*                                                           6.1.12       */
+/*                                                           6.2.1       */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Timothy Stapko, Microsoft Corporation                               */
@@ -72,6 +72,12 @@
 /*  07-29-2022     Yuxin Zhou               Modified comment(s),          */
 /*                                            added x448 curves,          */
 /*                                            resulting in version 6.1.12 */
+/*  10-31-2022     Yanwu Cai                Modified comment(s),          */
+/*                                            resulting in version 6.2.0  */
+/*  03-08-2023     Yanwu Cai                Modified comment(s),          */
+/*                                            fixed compiler errors when  */
+/*                                            x509 is disabled,           */
+/*                                            resulting in version 6.2.1  */
 /*                                                                        */
 /**************************************************************************/
 
@@ -115,14 +121,17 @@ extern NX_CRYPTO_METHOD crypto_method_hmac;
 
 /* Ciphersuite table without ECC. */
 /* Lookup table used to map ciphersuites to cryptographic routines. */
+/* For TLS Web servers, define NX_SECURE_ENABLE_AEAD_CIPHER to allow web browsers to connect using AES_128_GCM cipher suites. */
 NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table[] =
 {
     /* Ciphersuite,                           public cipher,            public_auth,              session cipher & cipher mode,   iv size, key size,  hash method,                    hash size, TLS PRF */
+#ifndef NX_SECURE_DISABLE_X509
 #ifdef NX_SECURE_ENABLE_AEAD_CIPHER
     {TLS_RSA_WITH_AES_128_GCM_SHA256,         &crypto_method_rsa,       &crypto_method_rsa,       &crypto_method_aes_128_gcm_16,  16,      16,        &crypto_method_null,            0,         &crypto_method_tls_prf_sha256},
 #endif /* NX_SECURE_ENABLE_AEAD_CIPHER */
     {TLS_RSA_WITH_AES_256_CBC_SHA256,         &crypto_method_rsa,       &crypto_method_rsa,       &crypto_method_aes_cbc_256,     16,      32,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},
     {TLS_RSA_WITH_AES_128_CBC_SHA256,         &crypto_method_rsa,       &crypto_method_rsa,       &crypto_method_aes_cbc_128,     16,      16,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},
+#endif /* NX_SECURE_DISABLE_X509 */
 
 #ifdef NX_SECURE_ENABLE_PSK_CIPHERSUITES
     {TLS_PSK_WITH_AES_128_CBC_SHA256,         &crypto_method_null,      &crypto_method_auth_psk,  &crypto_method_aes_cbc_128,     16,      16,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},
@@ -134,6 +143,7 @@ NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table[] =
 
 const UINT _nx_crypto_ciphersuite_lookup_table_size = sizeof(_nx_crypto_ciphersuite_lookup_table) / sizeof(NX_SECURE_TLS_CIPHERSUITE_INFO);
 
+#ifndef NX_SECURE_DISABLE_X509
 /* Lookup table for X.509 digital certificates - they need a public-key algorithm and a hash routine for verification. */
 NX_SECURE_X509_CRYPTO _nx_crypto_x509_cipher_lookup_table[] =
 {
@@ -146,6 +156,7 @@ NX_SECURE_X509_CRYPTO _nx_crypto_x509_cipher_lookup_table[] =
 };
 
 const UINT _nx_crypto_x509_cipher_lookup_table_size = sizeof(_nx_crypto_x509_cipher_lookup_table) / sizeof(NX_SECURE_X509_CRYPTO);
+#endif /* NX_SECURE_DISABLE_X509 */
 
 /* Define the object we can pass into TLS. */
 NX_SECURE_TLS_CRYPTO nx_crypto_tls_ciphers =
@@ -182,6 +193,8 @@ NX_SECURE_TLS_CRYPTO nx_crypto_tls_ciphers =
 
 #ifdef NX_SECURE_ENABLE_ECC_CIPHERSUITE
 
+#ifndef NX_SECURE_DISABLE_X509
+
 /* Lookup table for X.509 digital certificates - they need a public-key algorithm and a hash routine for verification. */
 NX_SECURE_X509_CRYPTO _nx_crypto_x509_cipher_lookup_table_ecc[] =
 {
@@ -200,7 +213,6 @@ NX_SECURE_X509_CRYPTO _nx_crypto_x509_cipher_lookup_table_ecc[] =
 
 const UINT _nx_crypto_x509_cipher_lookup_table_ecc_size = sizeof(_nx_crypto_x509_cipher_lookup_table_ecc) / sizeof(NX_SECURE_X509_CRYPTO);
 
-
 #if (NX_SECURE_TLS_TLS_1_3_ENABLED)
 NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table_tls_1_3[] =
 {
@@ -214,13 +226,16 @@ NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table_tls_1_3[] =
 
 const UINT _nx_crypto_ciphersuite_lookup_table_tls_1_3_size = sizeof(_nx_crypto_ciphersuite_lookup_table_tls_1_3) / sizeof(NX_SECURE_TLS_CIPHERSUITE_INFO);
 #endif
+#endif
 
 /* Ciphersuite table with ECC. */
 /* Lookup table used to map ciphersuites to cryptographic routines. */
 /* Ciphersuites are negotiated IN ORDER - top priority first. Ciphersuites lower in the list are considered less secure. */
+/* For TLS Web servers, define NX_SECURE_ENABLE_AEAD_CIPHER to allow web browsers to connect using AES_128_GCM cipher suites. */
 NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table_ecc[] =
 {
     /* Ciphersuite,                           public cipher,            public_auth,              session cipher & cipher mode,   iv size, key size,  hash method,                    hash size, TLS PRF */
+#ifndef NX_SECURE_DISABLE_X509
 #if (NX_SECURE_TLS_TLS_1_3_ENABLED)
     {TLS_AES_128_GCM_SHA256,                  &crypto_method_ecdhe,     &crypto_method_ecdsa,     &crypto_method_aes_128_gcm_16,  96,      16,        &crypto_method_sha256,         32,         &crypto_method_hkdf},
     {TLS_AES_128_CCM_SHA256,                  &crypto_method_ecdhe,     &crypto_method_ecdsa,     &crypto_method_aes_ccm_16,      96,      16,        &crypto_method_sha256,         32,         &crypto_method_hkdf},
@@ -241,6 +256,7 @@ NX_SECURE_TLS_CIPHERSUITE_INFO _nx_crypto_ciphersuite_lookup_table_ecc[] =
 
     {TLS_RSA_WITH_AES_256_CBC_SHA256,         &crypto_method_rsa,       &crypto_method_rsa,       &crypto_method_aes_cbc_256,     16,      32,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},
     {TLS_RSA_WITH_AES_128_CBC_SHA256,         &crypto_method_rsa,       &crypto_method_rsa,       &crypto_method_aes_cbc_128,     16,      16,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},
+#endif
 
 #ifdef NX_SECURE_ENABLE_PSK_CIPHERSUITES
     {TLS_PSK_WITH_AES_128_CBC_SHA256,         &crypto_method_null,      &crypto_method_auth_psk,  &crypto_method_aes_cbc_128,     16,      16,        &crypto_method_hmac_sha256,     32,        &crypto_method_tls_prf_sha256},

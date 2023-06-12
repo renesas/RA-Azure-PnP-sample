@@ -37,6 +37,8 @@ extern char g_iot_thing_name[];
 ULONG nx_azure_iot_thread_stack[NX_AZURE_IOT_STACK_SIZE / sizeof(ULONG)];
 UCHAR nx_azure_iot_tls_metadata_buffer[NX_AZURE_IOT_TLS_METADATA_BUFFER_SIZE];
 NX_SECURE_X509_CERT root_ca_cert;
+static NX_SECURE_X509_CERT root_ca_cert_2;
+static NX_SECURE_X509_CERT root_ca_cert_3;
 
 
 /* Define the prototypes for AZ IoT.  */
@@ -169,8 +171,8 @@ UINT iothub_device_id_length = 0;
 #else
 UCHAR *iothub_hostname = (UCHAR *)g_mqtt_endpoint;
 UCHAR *iothub_device_id = (UCHAR *)g_iot_thing_name;
-UINT iothub_hostname_length = sizeof(HOST_NAME) - 1;
-UINT iothub_device_id_length = sizeof(DEVICE_ID) - 1;
+UINT iothub_hostname_length = strlen(g_mqtt_endpoint);
+UINT iothub_device_id_length = strlen(g_iot_thing_name);
 #endif /* ENABLE_DPS_SAMPLE */
 
 #ifdef ENABLE_DPS_SAMPLE
@@ -209,6 +211,17 @@ UINT iothub_device_id_length = sizeof(DEVICE_ID) - 1;
   {
       IotLog("Failed on nx_azure_iot_hub_client_model_id_set!: error code = 0x%08x\r\n", status);
   }
+
+  /* Add more CA certificates.  */
+  else if ((status = nx_azure_iot_hub_client_trusted_cert_add(iothub_client_ptr, &root_ca_cert_2)))
+  {
+      IotLog("Failed on nx_azure_iot_hub_client_trusted_cert_add!: error code = 0x%08x\r\n", status);
+  }
+  else if ((status = nx_azure_iot_hub_client_trusted_cert_add(iothub_client_ptr, &root_ca_cert_3)))
+  {
+      IotLog("Failed on nx_azure_iot_hub_client_trusted_cert_add!: error code = 0x%08x\r\n", status);
+  }
+
 #if (USE_DEVICE_CERTIFICATE == 1)
 
     /* Initialize the device certificate.  */
@@ -334,6 +347,24 @@ void sample_entry(NX_IP *ip_ptr, NX_PACKET_POOL *pool_ptr, NX_DNS *dns_ptr, UINT
         return;
     }
     
+    if ((status = nx_secure_x509_certificate_initialize(&root_ca_cert_2, (UCHAR *)_nx_azure_iot_root_cert_2,
+                                                        (USHORT)_nx_azure_iot_root_cert_size_2,
+                                                        NX_NULL, 0, NULL, 0, NX_SECURE_X509_KEY_TYPE_NONE)))
+    {
+        IotLog("Failed to initialize ROOT CA certificate!: error code = 0x%08x\r\n", status);
+        nx_azure_iot_delete(&nx_azure_iot);
+        return;
+    }
+
+    if ((status = nx_secure_x509_certificate_initialize(&root_ca_cert_3, (UCHAR *)_nx_azure_iot_root_cert_3,
+                                                        (USHORT)_nx_azure_iot_root_cert_size_3,
+                                                        NX_NULL, 0, NULL, 0, NX_SECURE_X509_KEY_TYPE_NONE)))
+    {
+        IotLog("Failed to initialize ROOT CA certificate!: error code = 0x%08x\r\n", status);
+        nx_azure_iot_delete(&nx_azure_iot);
+        return;
+    }
+
     if ((status = sample_initialize_iothub(&iothub_client)))
     {
         IotLog("Failed to initialize iothub client: error code = 0x%08x\r\n", status);
@@ -443,6 +474,16 @@ UINT status;
     *iothub_hostname_length = sizeof(sample_iothub_hostname);
     *iothub_device_id_length = sizeof(sample_iothub_device_id);
 
+    /* Add more CA certificates.  */
+    if ((status = nx_azure_iot_provisioning_client_trusted_cert_add(&prov_client, &root_ca_cert_2)))
+    {
+        IotLog("Failed on nx_azure_iot_provisioning_client_trusted_cert_add!: error code = 0x%08x\r\n", status);
+    }
+    else if ((status = nx_azure_iot_provisioning_client_trusted_cert_add(&prov_client, &root_ca_cert_3)))
+    {
+        IotLog("Failed on nx_azure_iot_provisioning_client_trusted_cert_add!: error code = 0x%08x\r\n", status);
+    }
+
 #if (USE_DEVICE_CERTIFICATE == 1)
 
     /* Initialize the device certificate.  */
@@ -466,6 +507,12 @@ UINT status;
         IotLog("Failed on nx_azure_iot_hub_client_symmetric_key_set!: error code = 0x%08x\r\n", status);
     }
 #endif /* USE_DEVICE_CERTIFICATE */
+
+    else if ((status = nx_azure_iot_provisioning_client_registration_payload_set(&prov_client, (UCHAR *)SAMPLE_PNP_DPS_PAYLOAD,
+                                                                                 sizeof(SAMPLE_PNP_DPS_PAYLOAD) - 1)))
+    {
+        printf("Failed on nx_azure_iot_provisioning_client_registration_payload_set!: error code = 0x%08x\r\n", status);
+    }
 
     else if ((status = nx_azure_iot_provisioning_client_registration_payload_set(&prov_client, (UCHAR *)SAMPLE_PNP_DPS_PAYLOAD,
                                                                                  sizeof(SAMPLE_PNP_DPS_PAYLOAD) - 1)))
