@@ -1,0 +1,11 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+arg1 = $(1)
+export PATH=C:\Renesas\RA\e2studio_v2023-01_fsp_v4.3.0\toolchains\gcc_arm\gcc-arm-none-eabi-10.3-2021.10\bin\;C:\Renesas\RA\e2studio_v2023-01_fsp_v4.3.0\eclipse\plugins\com.renesas.ide.exttools.busybox.win32.x86_64_1.3.5.v20220125-0945\bin\;C:\Renesas\RA\e2studio_v2023-01_fsp_v4.3.0\eclipse\plugins\com.renesas.ide.exttools.gnumake.win32.x86_64_4.3.0.v20220121-1024\mk\;C:/Renesas/RA/e2studio_v2023-01_fsp_v4.3.0/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.4.v20220903-1038/jre/bin/server;C:/Renesas/RA/e2studio_v2023-01_fsp_v4.3.0/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.4.v20220903-1038/jre/bin;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\ProgramData\LLVM for Renesas RL78 10.0.0.202203\bin;C:\ProgramData\GCC for Renesas RX 8.3.0.202102-GNURX-ELF\bin;C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Program Files\TortoiseGit\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\GNU Tools Arm Embedded\9 2019-q4-major\bin;C:\Users\30592\AppData\Local\Microsoft\WindowsApps;C:\Program Files\OpenSSL-Win64\bin\;C:\Users\30592\.dotnet\tools;C:\Users\30592\AppData\Roaming\npm;C:\Renesas\RA\e2studio_v2023-01_fsp_v4.3.0\eclipse
+export TCINSTALL=C:\Renesas\RA\e2studio_v2023-01_fsp_v4.3.0\toolchains\gcc_arm\gcc-arm-none-eabi-10.3-2021.10$(call arg1,\)
+export CWD=$(CURDIR)
+export TC_VERSION=10.3.1.20210824
+export PWD=$(CURDIR)
+export GCC_VERSION=10.3.1
